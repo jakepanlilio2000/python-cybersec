@@ -16,13 +16,20 @@
         .font-mono {
             font-family: 'Roboto Mono', monospace;
         }
+        code {
+            background-color: #374151; /* bg-gray-700 */
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.9em;
+            color: #93c5fd; /* text-blue-300 */
+        }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
         .accordion-content.open {
-            max-height: 1000px; /* Adjust as needed */
+            max-height: 1500px; /* Increased for more content */
         }
         .rotate-180 {
             transform: rotate(180deg);
@@ -40,20 +47,16 @@
 </head>
 <body class="text-gray-200">
 
-    <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl">
         
-        <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold text-cyan-400">Interactive Python Cybersecurity Roadmap</h1>
-            <p class="mt-2 text-gray-400">From Fundamentals to Advanced Applications</p>
+            <p class="mt-2 text-gray-400">From Fundamentals to Advanced Applications with Detailed Instructions</p>
         </header>
 
-        <!-- Beginner Projects Section -->
         <section class="mb-12">
             <h2 class="text-2xl font-semibold border-b-2 border-gray-700 pb-2 mb-6 text-green-400">Beginner Projects: Mastering the Basics</h2>
             
-            <!-- Project 1: Port Scanner -->
             <div class="bg-gray-800 rounded-lg shadow-lg mb-4" id="project1">
                 <button class="accordion-toggle w-full flex justify-between items-center p-5 text-left font-semibold text-lg hover:bg-gray-700 rounded-t-lg focus:outline-none">
                     <span>Project 1: Simple Port Scanner</span>
@@ -63,40 +66,44 @@
                     <div class="p-5 border-t border-gray-700">
                         <p class="mb-4 text-gray-300">A fundamental tool for network reconnaissance. This project teaches socket programming and handling user input.</p>
                         <ul class="space-y-4">
-                            <!-- Step 1 -->
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 1: Connect to a Single Port</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Check if one specific port is open on a target machine.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use Python's built-in <code>socket</code> library. Write a script to create a socket object and attempt a connection to a specific port on a target IP. Handle both successful and failed connections to determine if the port is open or closed.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p1s1">Show Expected Output</button>
                                 </div>
                             </li>
-                            <!-- Step 2 -->
-                             <li class="flex items-start space-x-3">
+                            <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 2: Get User Input</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Make your tool interactive by accepting a target IP from the user.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Make your tool interactive. Use the <code>input()</code> function to prompt the user for an IP address to scan. You can also prompt for the port numbers later.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p1s2">Show Expected Output</button>
                                 </div>
                             </li>
-                            <!-- Step 3 -->
-                             <li class="flex items-start space-x-3">
+                            <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 3: Scan a Range of Ports</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Scan a series of common ports and show results as they happen.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Instead of one port, scan a series of common ports. Use a <code>for</code> loop to iterate through a range of numbers (e.g., 1 to 1024) and place your connection logic inside this loop.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p1s3">Show Expected Output</button>
                                 </div>
                             </li>
-                             <!-- Step 4 -->
                              <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 4: Refine the Output</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Make the final results clean by showing a summary at the end.</p>
+                                    <h4 class="font-semibold">Step 4: Improve Performance with Threading</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Speed up your scanner significantly. Use the <code>threading</code> module to create a worker function that attempts the connection. Start a new thread for each port so many connections can be attempted simultaneously.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p1s4">Show Expected Output</button>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
+                                <div>
+                                    <h4 class="font-semibold">Step 5: Refine the Output</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Make the results clean. Instead of printing a message for every closed port, store the open ports in a list. After the scan is complete, print a summary of only the open ports found.</p>
+                                    <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p1s5">Show Expected Output</button>
                                 </div>
                             </li>
                         </ul>
@@ -104,7 +111,6 @@
                 </div>
             </div>
 
-            <!-- Project 2: File Integrity Checker -->
             <div class="bg-gray-800 rounded-lg shadow-lg" id="project2">
                 <button class="accordion-toggle w-full flex justify-between items-center p-5 text-left font-semibold text-lg hover:bg-gray-700 rounded-t-lg focus:outline-none">
                     <span>Project 2: File Integrity Checker</span>
@@ -114,39 +120,35 @@
                     <div class="p-5 border-t border-gray-700">
                         <p class="mb-4 text-gray-300">A cornerstone of host-based security. Creates a "fingerprint" of files and checks for modifications.</p>
                         <ul class="space-y-4">
-                           <!-- Step 1 -->
-                            <li class="flex items-start space-x-3">
+                           <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 1: Hash a Single File</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Generate a unique, cryptographic fingerprint (hash) for a file.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use the <code>hashlib</code> library. Write a function that takes a file path, reads the file's content in binary mode (<code>'rb'</code>), and returns its SHA-256 hash as a hex digest.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p2s1">Show Expected Output</button>
                                 </div>
                             </li>
-                            <!-- Step 2 -->
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 2: Create a Baseline</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Scan a directory and save the path and hash of every file.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use <code>os.walk</code> to recursively list all files in a directory. For each file, generate its hash and store the results (filepath: hash) in a dictionary. Save this dictionary to a file using the <code>json</code> library.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p2s2">Show Expected Output</button>
                                 </div>
                             </li>
-                            <!-- Step 3 -->
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 3: Verify Integrity</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Compare the current state of files to the baseline and report changes.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Load the baseline JSON file. Rescan the directory and for each file, compare its current hash to the baseline hash. Report on `MODIFIED` (hash mismatch), `NEW` (not in baseline), and `DELETED` (in baseline but not on disk) files.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p2s3">Show Expected Output</button>
                                 </div>
                             </li>
-                            <!-- Step 4 -->
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 4: Add Command-Line Arguments</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Make the tool flexible with command-line controls.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use the <code>argparse</code> module to create a professional command-line interface. It should accept arguments to specify the mode (`--generate` or `--check`) and the target directory.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p2s4">Show Expected Output</button>
                                 </div>
                             </li>
@@ -156,11 +158,9 @@
             </div>
         </section>
 
-        <!-- Advanced Projects Section -->
         <section>
             <h2 class="text-2xl font-semibold border-b-2 border-gray-700 pb-2 mb-6 text-red-400">Advanced Projects: Complexity & Design</h2>
 
-            <!-- Project 3: Packet Sniffer -->
             <div class="bg-gray-800 rounded-lg shadow-lg mb-4" id="project3">
                 <button class="accordion-toggle w-full flex justify-between items-center p-5 text-left font-semibold text-lg hover:bg-gray-700 rounded-t-lg focus:outline-none">
                     <span>Project 3: Network Packet Sniffer & Analyzer</span>
@@ -173,28 +173,35 @@
                             <p class="text-sm text-gray-300">Define a family of algorithms (protocol parsers), encapsulate each one, and make them interchangeable. This lets you switch between parsing TCP, UDP, or ICMP without changing the main sniffer logic.</p>
                         </div>
                         <ul class="space-y-4">
-                           <!-- Steps for Project 3 -->
                            <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 1: Capture Raw Packets</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Access the raw data of network packets and display a high-level summary.</p>
+                                    <h4 class="font-semibold">Step 1: Environment Setup & First Capture</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Install the <code>scapy</code> library (`pip install scapy`). Experiment with its `sniff()` function to capture a few packets and print their summary to see live traffic.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p3s1">Show Expected Output</button>
                                 </div>
                             </li>
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 2: Decode Network & Internet Layers</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Parse the Ethernet and IP layers to get MAC and IP addresses.</p>
+                                    <h4 class="font-semibold">Step 2: Implement the Strategy Pattern</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Define the code structure. Create an abstract base class `ParserStrategy` with an abstract `parse` method. Then, create a `PacketParser` context class that will hold and use a strategy object.</p>
+                                    <p class="text-xs text-gray-500 mb-2 italic">This step is about code structure and will not have a direct visual output.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start space-x-3">
+                                <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
+                                <div>
+                                    <h4 class="font-semibold">Step 3: Create Concrete Parsers</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Create classes like <code>EthernetParser</code>, <code>IpParser</code>, and <code>TcpParser</code> that inherit from `ParserStrategy`. In each class, implement the `parse` method to unpack the specific protocol header from the raw packet bytes and extract its fields.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p3s2">Show Expected Output</button>
                                 </div>
                             </li>
                              <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 3: Decode Transport Layer</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Parse the TCP or UDP layer to find port numbers and other details.</p>
+                                    <h4 class="font-semibold">Step 4: Build the Main Sniffer Logic</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Create a raw socket to capture packets. In a loop, receive data and orchestrate the parsing. Start with the `EthernetParser`, then based on its result, switch the strategy in your `PacketParser` context to the correct L3 parser (e.g., `IpParser`), and so on for L4.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p3s3">Show Expected Output</button>
                                 </div>
                             </li>
@@ -203,7 +210,6 @@
                 </div>
             </div>
 
-            <!-- Project 4: Keylogger -->
             <div class="bg-gray-800 rounded-lg shadow-lg mb-4" id="project4">
                 <button class="accordion-toggle w-full flex justify-between items-center p-5 text-left font-semibold text-lg hover:bg-gray-700 rounded-t-lg focus:outline-none">
                     <span>Project 4: Keylogger with Email Reporting</span>
@@ -220,12 +226,11 @@
                             <p class="text-sm text-gray-300">Ensures that only one instance of your keylogger class can ever exist. This is crucial to prevent multiple instances from conflicting or consuming unnecessary resources.</p>
                         </div>
                         <ul class="space-y-4">
-                           <!-- Steps for Project 4 -->
                            <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 1: Capture Keystrokes</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Hook into the keyboard and see key presses in real-time.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use the <code>pynput</code> library. Create a keyboard `Listener` and define a callback function (`on_press`) that gets executed every time a key is pressed. For now, just print the key to the console.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p4s1">Show Expected Output</button>
                                 </div>
                             </li>
@@ -233,15 +238,15 @@
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 2: Log to a File</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Save captured keystrokes to a local file instead of printing them.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> In your `on_press` function, instead of printing, append the keystroke data to a string or list. Write a separate method to save this log buffer to a file (e.g., in a temporary or hidden directory).</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p4s2">Show Expected Output</button>
                                 </div>
                             </li>
                              <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 3: Send an Email</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Write logic to send the contents of the log file via email.</p>
+                                    <h4 class="font-semibold">Step 3: Send Logs via Email</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use Python's built-in <code>smtplib</code> and <code>email</code> modules. Write a function to log into an email account (use a dedicated app password, not your main password) and send the contents of the log file to a recipient email address.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p4s3">Show Expected Output</button>
                                 </div>
                             </li>
@@ -249,7 +254,7 @@
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
                                     <h4 class="font-semibold">Step 4: Combine and Automate</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Run silently and automatically email logs at a set interval.</p>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use <code>threading.Timer</code> to call your email reporting function at regular intervals (e.g., every hour). Instantiate your `Keylogger` (using the Singleton pattern) and start the listener. The script should now run as a cohesive, automated agent.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p4s4">Show Expected Output</button>
                                 </div>
                             </li>
@@ -258,7 +263,6 @@
                 </div>
             </div>
 
-            <!-- Project 5: Vulnerability Scanner -->
             <div class="bg-gray-800 rounded-lg shadow-lg" id="project5">
                 <button class="accordion-toggle w-full flex justify-between items-center p-5 text-left font-semibold text-lg hover:bg-gray-700 rounded-t-lg focus:outline-none">
                     <span>Project 5: Web App Vulnerability Scanner</span>
@@ -275,28 +279,35 @@
                             <p class="text-sm text-gray-300">Provides an interface for creating "scanner" objects but lets subclasses (your main engine) decide which class to instantiate. This makes it easy to add new vulnerability modules (XSS, SQLi, LFI) later.</p>
                         </div>
                         <ul class="space-y-4">
-                           <!-- Steps for Project 5 -->
                            <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 1: Crawl the Target Website</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Discover all links, forms, and inputs on a site to test.</p>
+                                    <h4 class="font-semibold">Step 1: The Core Engine: Crawling</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Use the <code>requests</code> library to fetch a page's HTML and <code>BeautifulSoup</code> to parse it. Write a crawler that takes a starting URL, extracts all `&lt;a&gt;` and `&lt;form&gt;` tags, and adds them to a queue of targets to scan.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p5s1">Show Expected Output</button>
                                 </div>
                             </li>
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 2: Test for a Single Vulnerability</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Implement logic for one vulnerability (e.g., XSS) and test all found inputs.</p>
+                                    <h4 class="font-semibold">Step 2: Create Scanner "Products"</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Implement the logic for specific vulnerability checks. Create an `XssScanner` class that injects XSS payloads into inputs and checks the response. Create an `SqlInjectionScanner` that injects SQL payloads and checks for database errors or changes in response.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p5s2">Show Expected Output</button>
                                 </div>
                             </li>
                             <li class="flex items-start space-x-3">
                                 <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
                                 <div>
-                                    <h4 class="font-semibold">Step 3: Generate a Final Report</h4>
-                                    <p class="text-sm text-gray-400 mb-2">Goal: Combine multiple scanners and present all findings in a clean summary.</p>
+                                    <h4 class="font-semibold">Step 3: Implement the Factory & Main Logic</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Create a `ScannerFactory` class that can create scanner objects based on user input (e.g., "xss"). The main script will take a target URL, use the factory to create the desired scanners, and run them against the list of crawled targets.</p>
+                                    <p class="text-xs text-gray-500 mb-2 italic">This is a logic and structure step; the final report is the key output.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start space-x-3">
+                                <input type="checkbox" class="mt-1.5 form-checkbox h-5 w-5 bg-gray-700 border-gray-600 text-cyan-500 rounded focus:ring-cyan-500">
+                                <div>
+                                    <h4 class="font-semibold">Step 4: Reporting</h4>
+                                    <p class="text-sm text-gray-400 mb-2"><strong>Instruction:</strong> Create a reporting module. When a scanner finds a potential vulnerability, it should log the details (URL, parameter, payload). At the end of the run, print a clean, well-formatted summary of all findings.</p>
                                     <button class="modal-open-btn text-sm bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 px-3 rounded-md" data-modal-id="modal-p5s3">Show Expected Output</button>
                                 </div>
                             </li>
@@ -308,9 +319,7 @@
 
     </div>
 
-    <!-- Modals Container -->
     <div id="modals-container">
-        <!-- P1S1 -->
         <div id="modal-p1s1" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P1S1: Expected Output</h3>
@@ -319,7 +328,6 @@
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P1S2 -->
         <div id="modal-p1s2" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P1S2: Expected Output</h3>
@@ -327,7 +335,6 @@
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P1S3 -->
         <div id="modal-p1s3" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P1S3: Expected Output</h3>
@@ -340,10 +347,16 @@ Port 80 is open</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P1S4 -->
         <div id="modal-p1s4" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P1S4: Expected Output</h3>
+                <p class="text-gray-400 text-sm mb-2">The key output is speed. The program will print results much faster and potentially out of order as threads complete. The final refined output in the next step is the true goal.</p>
+                <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
+            </div>
+        </div>
+        <div id="modal-p1s5" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
+                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P1S5: Expected Output</h3>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">Scanning 192.168.1.1...
 Scan complete.
 Open ports found:
@@ -353,7 +366,6 @@ Open ports found:
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P2S1 -->
         <div id="modal-p2s1" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P2S1: Expected Output</h3>
@@ -362,11 +374,10 @@ a8c7da41d3a6c2c6e3d2b8e3f0f7a9c5a3e2d1b0c4b3f2a1d0e9c8b7a6f5d4e3</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P2S2 -->
         <div id="modal-p2s2" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P2S2: Expected Output</h3>
-                <p class="text-gray-400 text-sm mb-2">The program should create a file (e.g., <code class="font-mono text-xs bg-gray-700 p-1 rounded">baseline.json</code>) with content like this:</p>
+                <p class="text-gray-400 text-sm mb-2">The program should create a file (e.g., <code>baseline.json</code>) with content like this:</p>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">{
   "C:\\Users\\Admin\\report.docx": "e3b0...",
   "C:\\Users\\Admin\\config.ini": "a1b2...",
@@ -375,7 +386,6 @@ a8c7da41d3a6c2c6e3d2b8e3f0f7a9c5a3e2d1b0c4b3f2a1d0e9c8b7a6f5d4e3</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P2S3 -->
         <div id="modal-p2s3" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P2S3: Expected Output</h3>
@@ -387,11 +397,10 @@ Check complete.</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P2S4 -->
         <div id="modal-p2s4" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P2S4: Expected Output</h3>
-                 <p class="text-gray-400 text-sm mb-2">Running your script with a <code class="font-mono text-xs bg-gray-700 p-1 rounded">--help</code> flag should produce a help menu:</p>
+                 <p class="text-gray-400 text-sm mb-2">Running your script with a <code>--help</code> flag should produce a help menu:</p>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">usage: integrity_checker.py [-h] {generate,check} directory
 
 A tool to monitor file integrity.
@@ -406,7 +415,6 @@ optional arguments:
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P3S1 -->
         <div id="modal-p3s1" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P3S1: Expected Output</h3>
@@ -416,22 +424,23 @@ Ether / IP / UDP 192.168.1.10:60123 > 8.8.8.8:domain</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P3S2 -->
         <div id="modal-p3s2" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
-                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P3S2: Expected Output</h3>
+                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P3S3: Expected Output</h3>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">--- Packet Captured ---
 [+] Ethernet Frame:
     - Dest: 00:1A:2B:3C:4D:5E, Source: FF:EE:DD:CC:BB:AA
 [+] IP Packet:
-    - Source: 192.168.1.10, Dest: 8.8.8.8</pre>
+    - Source: 192.168.1.10, Dest: 8.8.8.8
+[+] TCP Segment:
+    - Source Port: 54321, Dest Port: 443 (https)
+-----------------------</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P3S3 -->
         <div id="modal-p3s3" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
-                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P3S3: Expected Output</h3>
+                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P3S4: Expected Output</h3>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">--- Packet Captured ---
 [+] Ethernet Frame:
     - Dest: 00:1A:2B:3C:4D:5E, Source: FF:EE:DD:CC:BB:AA
@@ -443,7 +452,6 @@ Ether / IP / UDP 192.168.1.10:60123 > 8.8.8.8:domain</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P4S1 -->
         <div id="modal-p4s1" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P4S1: Expected Output</h3>
@@ -457,16 +465,14 @@ Key.space pressed
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P4S2 -->
         <div id="modal-p4s2" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P4S2: Expected Output</h3>
-                <p class="text-gray-400 text-sm mb-2">The program runs silently. Afterwards, a file (<code class="font-mono text-xs bg-gray-700 p-1 rounded">log.txt</code>) should contain:</p>
+                <p class="text-gray-400 text-sm mb-2">The program runs silently. Afterwards, a file (<code>log.txt</code>) should contain:</p>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">Hello[KEY_SPACE]WOrld[KEY_ENTER]This is a test.</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P4S3 -->
         <div id="modal-p4s3" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P4S3: Expected Output</h3>
@@ -478,7 +484,6 @@ Body: Hello[KEY_SPACE]WOrld...</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P4S4 -->
         <div id="modal-p4s4" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P4S4: Expected Output</h3>
@@ -486,7 +491,6 @@ Body: Hello[KEY_SPACE]WOrld...</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P5S1 -->
         <div id="modal-p5s1" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P5S1: Expected Output</h3>
@@ -499,7 +503,6 @@ Found 3 links and 1 form to test.</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P5S2 -->
         <div id="modal-p5s2" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
                 <h3 class="text-lg font-semibold mb-2 text-cyan-400">P5S2: Expected Output</h3>
@@ -509,10 +512,9 @@ Found 3 links and 1 form to test.</pre>
                 <button class="modal-close-btn mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">Close</button>
             </div>
         </div>
-        <!-- P5S3 -->
         <div id="modal-p5s3" class="modal fixed inset-0 bg-black bg-opacity-70 items-center justify-center p-4">
             <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg">
-                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P5S3: Expected Output</h3>
+                <h3 class="text-lg font-semibold mb-2 text-cyan-400">P5S4: Expected Output</h3>
                 <pre class="bg-gray-900 text-white p-4 rounded-md text-sm font-mono whitespace-pre-wrap">--- Web Vulnerability Scan Report ---
 Target: http://testsite.local
 Scans performed: xss, sql
@@ -547,6 +549,13 @@ Scan complete. Found 2 potential vulnerabilities.</pre>
                         content.classList.remove('open');
                         icon.classList.remove('rotate-180');
                     } else {
+                        // Close other accordions in the same section
+                        const parentSection = toggle.closest('section');
+                        parentSection.querySelectorAll('.accordion-content.open').forEach(openContent => {
+                            openContent.classList.remove('open');
+                            openContent.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
+                        });
+                        
                         content.classList.add('open');
                         icon.classList.add('rotate-180');
                     }
@@ -561,15 +570,21 @@ Scan complete. Found 2 potential vulnerabilities.</pre>
                 button.addEventListener('click', () => {
                     const modalId = button.getAttribute('data-modal-id');
                     const modal = document.getElementById(modalId);
-                    if (modal) {
+if (modal) {
+                        document.body.style.overflow = 'hidden'; // prevent scrolling background
                         modal.classList.add('open');
                     }
                 });
             });
 
+            const closeModal = (modal) => {
+                document.body.style.overflow = ''; // re-enable scrolling
+                modal.classList.remove('open');
+            }
+
             modalCloseButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    button.closest('.modal').classList.remove('open');
+                    closeModal(button.closest('.modal'));
                 });
             });
 
@@ -577,9 +592,18 @@ Scan complete. Found 2 potential vulnerabilities.</pre>
             document.querySelectorAll('.modal').forEach(modal => {
                 modal.addEventListener('click', function (e) {
                     if (e.target === this) {
-                        this.classList.remove('open');
+                        closeModal(this);
                     }
                 });
+            });
+            
+            // Close modal with Escape key
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.open').forEach(modal => {
+                        closeModal(modal);
+                    });
+                }
             });
         });
     </script>
