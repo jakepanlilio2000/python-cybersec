@@ -44,6 +44,13 @@
             justify-content: center;
             flex-shrink: 0;
         }
+         .phase-step code {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            font-weight: 500;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -110,13 +117,13 @@
                 libs: ['socket', 'threading', 'argparse'],
                 skills: { Networking: 60, Programming: 30, CLI: 10 },
                 phases: [
-                    { title: 'Phase 1: Basic Port Scanner', content: 'Create a script using the `socket` module to connect to a single port on a target IP. Set a timeout and check the connection result to determine if the port is open or closed.' },
-                    { title: 'Phase 2: Multi-Port Scanner', content: 'Expand the script to accept a range of ports. Use a `for` loop to iterate through the range, and encapsulate the scanning logic into a reusable function.' },
-                    { title: 'Phase 3: Multi-Host Scanner', content: 'Further extend the scanner to accept a range of IP addresses. You will need to parse this range and nest your port scanning loop inside an IP address loop.' },
-                    { title: 'Phase 4: Service Banner Grabbing', content: 'When a port is open, use `socket.recv()` to receive data from the service. This "banner" often reveals the service type and version, providing valuable information.' },
-                    { title: 'Phase 5: Add Threading for Speed', content: 'Import the `threading` module to run scans on multiple ports concurrently. This drastically improves the scanner\'s performance by not waiting for each port scan to finish sequentially.' },
-                    { title: 'Phase 6: Command-Line Interface (CLI)', content: 'Use the `argparse` module to build a user-friendly CLI. Allow users to specify targets and ports as command-line arguments (e.g., `-t 127.0.0.1 -p 1-1024`).' },
-                    { title: 'Phase 7: Output to File', content: 'Add an optional argument to save the scan results to a text file. This is useful for logging and later analysis.' },
+                    { title: 'Phase 1: Basic Port Scanner', content: '<strong>Instruction:</strong> Create a script using the <code>socket</code> module to connect to a single port on a target IP. Set a timeout using <code>socket.settimeout()</code> and check the connection result from <code>socket.connect_ex()</code> to determine if the port is open or closed.' },
+                    { title: 'Phase 2: Multi-Port Scanner', content: '<strong>Instruction:</strong> Expand the script to accept a range of ports. Use a <code>for</code> loop to iterate through the range, and encapsulate the scanning logic into a reusable function that takes an IP and a port number as arguments.' },
+                    { title: 'Phase 3: Multi-Host Scanner', content: '<strong>Instruction:</strong> Further extend the scanner to accept a range of IP addresses (e.g., "192.168.1.1-254"). You will need to write logic to parse this range and nest your port scanning loop inside an IP address loop.' },
+                    { title: 'Phase 4: Service Banner Grabbing', content: '<strong>Instruction:</strong> When a port is found to be open, use <code>socket.recv(1024)</code> inside a try-except block to receive up to 1024 bytes of data from the service. This "banner" often reveals the service type and version.' },
+                    { title: 'Phase 5: Add Threading for Speed', content: '<strong>Instruction:</strong> Import the <code>threading</code> module to run scans on multiple ports concurrently. Create a worker function for your scanning logic and start a new thread for each port, drastically improving performance.' },
+                    { title: 'Phase 6: Command-Line Interface (CLI)', content: '<strong>Instruction:</strong> Use the <code>argparse</code> module to build a user-friendly CLI. Allow users to specify targets and ports as command-line arguments (e.g., <code>-t 127.0.0.1 -p 1-1024</code>).' },
+                    { title: 'Phase 7: Output to File', content: '<strong>Instruction:</strong> Add an optional argument (e.g., <code>-o results.txt</code>) to your argparse setup. If the argument is provided, open the specified file in write mode and save the scan results to it.' },
                 ]
             },
             project2: {
@@ -131,11 +138,11 @@
                 libs: ['requests', 'BeautifulSoup4', 're'],
                 skills: { Web: 65, Programming: 25, Security: 10 },
                 phases: [
-                    { title: 'Phase 1: HTTP Request/Response Handler', content: 'Use the `requests` library to send GET and POST requests. Learn to handle response codes, text content, headers, and cookies. Implement session management to maintain state.' },
-                    { title: 'Phase 2: Basic XSS Scanner', content: 'Identify input points in a web app (like URL parameters). Craft simple XSS payloads and inject them into requests. Check if the payload is reflected in the HTML response without proper encoding.' },
-                    { title: 'Phase 3: Basic SQL Injection Scanner', content: 'Focus on parameters likely to interact with a database. Craft simple error-based SQLi payloads and inject them. Detect vulnerabilities by searching for common SQL error messages in the response.' },
-                    { title: 'Phase 4: Form Submission & Session Handling', content: 'Implement functionality to log into a target application using a `requests.Session()` object. Optionally, use BeautifulSoup4 to automatically discover and submit forms.' },
-                    { title: 'Phase 5: Reporting', content: 'Create a clear and structured output for found vulnerabilities. Print the vulnerable URL, the payload used, and the type of vulnerability found. Consider saving results to a file.' }
+                    { title: 'Phase 1: HTTP Request/Response Handler', content: '<strong>Instruction:</strong> Use the <code>requests</code> library to send GET and POST requests. Learn to handle response codes (<code>r.status_code</code>), text content (<code>r.text</code>), headers, and cookies. Implement session management with <code>requests.Session()</code> to maintain state across requests.' },
+                    { title: 'Phase 2: Basic XSS Scanner', content: '<strong>Instruction:</strong> Identify input points in a web app (like URL parameters). Craft simple XSS payloads (e.g., <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>) and inject them into requests. Check if the payload is reflected in the HTML response without proper HTML entity encoding.' },
+                    { title: 'Phase 3: Basic SQL Injection Scanner', content: '<strong>Instruction:</strong> Focus on parameters likely to interact with a database. Craft simple error-based SQLi payloads (e.g., <code>\' OR 1=1--</code>) and inject them. Detect vulnerabilities by using the <code>re</code> module to search for common SQL error messages (like "You have an error in your SQL syntax") in the response text.' },
+                    { title: 'Phase 4: Form Submission & Session Handling', content: '<strong>Instruction:</strong> Implement functionality to log into a target application using a <code>requests.Session()</code> object. Optionally, use <code>BeautifulSoup4</code> to automatically discover all <code>&lt;form&gt;</code> elements and their <code>&lt;input&gt;</code> fields, then programmatically submit them.' },
+                    { title: 'Phase 5: Reporting', content: '<strong>Instruction:</strong> Create a clear and structured output for found vulnerabilities. Print the vulnerable URL, the parameter tested, the payload used, and the type of vulnerability found. Consider saving these structured results to a JSON or CSV file.' }
                 ]
             },
             project3: {
@@ -150,11 +157,11 @@
                 libs: ['os', 'subprocess', 'shutil', 'time', 'psutil (optional)'],
                 skills: { Systems: 60, Programming: 35, Security: 5 },
                 phases: [
-                    { title: 'Phase 1: Basic File System Monitor', content: 'Use the `os` module to record the state of a directory before running a program. Use `subprocess` to run the program, then re-scan the directory to report any created, modified, or deleted files.' },
-                    { title: 'Phase 2: Basic Process Monitor', content: 'Use `subprocess.Popen()` to execute and monitor a program. Record its Process ID (PID) and its return code upon completion. Handle timeouts for programs that run too long.' },
-                    { title: 'Phase 3: Network Activity Logger (Simulated)', content: 'Simulate network monitoring by capturing the program\'s standard output and searching for strings like URLs or IP addresses. A true implementation would require more complex proxying.' },
-                    { title: 'Phase 4: Report Generation', content: 'Combine all collected data—file system changes, process information, and network activity—into a single, consolidated analysis report printed to the console or saved to a file.' },
-                    { title: 'Phase 5: Sandbox Environment', content: 'Use the `tempfile` and `shutil` modules to create a temporary, isolated directory for each analysis run. This ensures a clean state for every execution and helps prevent unintended side effects.' }
+                    { title: 'Phase 1: Basic File System Monitor', content: '<strong>Instruction:</strong> Use the <code>os</code> module (specifically <code>os.walk</code> or <code>os.listdir</code>) to record the state of a directory before running a program. Use <code>subprocess.run()</code> to execute the program, then re-scan the directory to report any created, modified, or deleted files.' },
+                    { title: 'Phase 2: Basic Process Monitor', content: '<strong>Instruction:</strong> Use <code>subprocess.Popen()</code> to execute and monitor a program. Record its Process ID (<code>proc.pid</code>) and its return code upon completion with <code>proc.wait()</code>. Handle timeouts for programs that run too long by passing the <code>timeout</code> argument.' },
+                    { title: 'Phase 3: Network Activity Logger (Simulated)', content: '<strong>Instruction:</strong> Simulate network monitoring by capturing the program\'s standard output (using <code>subprocess.PIPE</code>) and using the <code>re</code> module to search for strings that look like URLs or IP addresses. A true implementation would require more complex proxying.' },
+                    { title: 'Phase 4: Report Generation', content: '<strong>Instruction:</strong> Combine all collected data—file system changes, process information (PID, return code), and simulated network activity—into a single, consolidated analysis report printed to the console or saved to a structured file like JSON.' },
+                    { title: 'Phase 5: Sandbox Environment', content: '<strong>Instruction:</strong> Use the <code>tempfile.TemporaryDirectory()</code> context manager and the <code>shutil</code> module to create a temporary, isolated directory for each analysis run. Copy the executable into this directory before running it. This ensures a clean state for every execution.' }
                 ]
             }
         };
@@ -218,7 +225,7 @@
                             <span class="details-arrow text-slate-500 group-hover:text-slate-800 transition-transform duration-300">&#10148;</span>
                         </summary>
                         <div class="p-5 pt-0">
-                           <p class="text-slate-600 leading-relaxed phase-step">${phase.content}</p>
+                           <div class="text-slate-600 leading-relaxed phase-step">${phase.content}</div>
                         </div>
                     </details>
                 `;
