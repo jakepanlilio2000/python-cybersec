@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Cybersecurity Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cyber Slate -->
+    <!-- Application Structure Plan: The application is structured as a single-page dashboard. The main view presents three project cards (Beginner, Advanced, Advanced) for high-level comparison. Clicking a card navigates the user to a detailed view for that project, which replaces the main view. This detail view uses interactive accordions for the project phases, breaking down dense information into digestible, user-controlled chunks. This structure was chosen to transform a linear document into a non-linear, exploratory experience, preventing user overload and improving navigation and content retention. A persistent top navigation allows easy switching between project detail views and returning to the main dashboard. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Project difficulty levels. -> Goal: Compare. -> Viz/Presentation: Bar Chart (Chart.js). -> Interaction: Static display. -> Justification: Provides an immediate visual comparison of the effort required for each project. -> Library: Chart.js.
+        - Report Info: Key concepts for each project. -> Goal: Compare/Inform. -> Viz/Presentation: Donut Chart (Chart.js). -> Interaction: Static display with tooltips. -> Justification: Visually breaks down the skill domains (e.g., Networking, Web, Systems) for each project, helping users understand the learning focus. -> Library: Chart.js.
+        - Report Info: Project progression. -> Goal: Organize/Change. -> Viz/Presentation: Interactive Roadmap/Timeline (HTML/CSS). -> Interaction: Clickable steps highlight the selected project. -> Justification: Clearly illustrates the intended learning path from beginner to advanced topics in a more engaging way than a simple list. -> Method: HTML/CSS with Tailwind.
+        - Report Info: Detailed project phases. -> Goal: Organize/Inform. -> Viz/Presentation: Interactive Accordion (HTML <details>/<summary> & JS). -> Interaction: Users click a phase title to expand/collapse its content. -> Justification: Manages information density, allowing users to focus on one phase at a time without being overwhelmed by a long wall of text. -> Method: HTML/JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .details-arrow::-webkit-details-marker { display: none; }
+        .details-arrow { transition: transform 0.3s; }
+        details[open] .details-arrow { transform: rotate(90deg); }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .nav-link.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+        .nav-link { border-bottom-color: transparent; }
+        .phase-step {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+        }
+        .phase-step::before {
+            content: counter(step-counter);
+            margin-right: 1rem;
+            background-color: #eef2ff;
+            color: #4338ca;
+            font-weight: 600;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div id="app" class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">Python Cybersecurity Project Roadmap</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">An interactive guide to building your cybersecurity skills with Python, from fundamentals to advanced applications.</p>
+        </header>
+
+        <nav id="main-nav" class="flex justify-center border-b border-slate-200 mb-12">
+            <button data-view="dashboard" class="nav-link text-slate-600 hover:text-blue-500 font-medium py-3 px-4 border-b-2 hover:border-blue-500 transition-colors duration-300 active">Dashboard</button>
+            <button data-view="project1" class="nav-link text-slate-600 hover:text-blue-500 font-medium py-3 px-4 border-b-2 hover:border-blue-500 transition-colors duration-300">Project 1: Network Scanner</button>
+            <button data-view="project2" class="nav-link text-slate-600 hover:text-blue-500 font-medium py-3 px-4 border-b-2 hover:border-blue-500 transition-colors duration-300">Project 2: Web Scanner</button>
+            <button data-view="project3" class="nav-link text-slate-600 hover:text-blue-500 font-medium py-3 px-4 border-b-2 hover:border-blue-500 transition-colors duration-300">Project 3: Malware Sandbox</button>
+        </nav>
+
+        <main>
+            <div id="view-dashboard" class="view active">
+                <section id="introduction" class="mb-16">
+                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-4">Your Learning Journey</h2>
+                     <p class="text-md text-slate-600 max-w-3xl mx-auto text-center mb-8">This roadmap is designed as a three-step journey to build practical cybersecurity skills using Python. Start with the beginner-friendly Network Scanner to grasp the fundamentals, then move to the advanced projects to tackle web vulnerabilities and malware analysis. Each card below provides a summary; click on one to dive into the detailed project plan.</p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Project Cards will be injected here by JS -->
+                    </div>
+                </section>
+                
+                <section id="visualizations" class="bg-white p-8 rounded-2xl shadow-sm">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-8">Projects at a Glance</h2>
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-xl font-semibold text-center mb-4">Project Complexity</h3>
+                            <div class="chart-container h-64 md:h-80">
+                                <canvas id="complexityChart"></canvas>
+                            </div>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-semibold text-center mb-4">Skill Focus Areas</h3>
+                             <div class="chart-container h-64 md:h-80">
+                                <canvas id="skillsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="view-project1" class="view hidden"></div>
+            <div id="view-project2" class="view hidden"></div>
+            <div id="view-project3" class="view hidden"></div>
+        </main>
+    </div>
+
+    <script>
+        const projectData = {
+            project1: {
+                id: 'project1',
+                title: 'Network Scanner',
+                level: 'Beginner',
+                levelValue: 1,
+                icon: '&#128279;',
+                description: 'Build a tool to identify open ports and services on a network, mastering Python basics and network communication.',
+                goal: 'To build a fundamental network scanner that identifies open ports and basic service information on target hosts. This project will solidify your understanding of Python\'s core features, network communication, and error handling.',
+                concepts: ['Python Basics (Variables, Loops, Functions)', 'Networking Fundamentals (TCP/IP, Sockets)', 'Error Handling (try-except)', 'Concurrency (Threading)', 'Command-Line Interface (CLI)'],
+                libs: ['socket', 'threading', 'argparse'],
+                skills: { Networking: 60, Programming: 30, CLI: 10 },
+                phases: [
+                    { title: 'Phase 1: Basic Port Scanner', content: 'Create a script using the `socket` module to connect to a single port on a target IP. Set a timeout and check the connection result to determine if the port is open or closed.' },
+                    { title: 'Phase 2: Multi-Port Scanner', content: 'Expand the script to accept a range of ports. Use a `for` loop to iterate through the range, and encapsulate the scanning logic into a reusable function.' },
+                    { title: 'Phase 3: Multi-Host Scanner', content: 'Further extend the scanner to accept a range of IP addresses. You will need to parse this range and nest your port scanning loop inside an IP address loop.' },
+                    { title: 'Phase 4: Service Banner Grabbing', content: 'When a port is open, use `socket.recv()` to receive data from the service. This "banner" often reveals the service type and version, providing valuable information.' },
+                    { title: 'Phase 5: Add Threading for Speed', content: 'Import the `threading` module to run scans on multiple ports concurrently. This drastically improves the scanner\'s performance by not waiting for each port scan to finish sequentially.' },
+                    { title: 'Phase 6: Command-Line Interface (CLI)', content: 'Use the `argparse` module to build a user-friendly CLI. Allow users to specify targets and ports as command-line arguments (e.g., `-t 127.0.0.1 -p 1-1024`).' },
+                    { title: 'Phase 7: Output to File', content: 'Add an optional argument to save the scan results to a text file. This is useful for logging and later analysis.' },
+                ]
+            },
+            project2: {
+                id: 'project2',
+                title: 'Web Vulnerability Scanner',
+                level: 'Advanced',
+                levelValue: 2,
+                icon: '&#128737;',
+                description: 'Develop a tool to find common web vulnerabilities like XSS and SQL Injection in web applications.',
+                goal: 'To develop a basic tool that can identify common web vulnerabilities like Reflected Cross-Site Scripting (XSS) and simple SQL Injection (SQLi) in web applications. This project will deepen your understanding of HTTP, web parsing, and common attack vectors.',
+                concepts: ['HTTP Protocol (GET/POST, Headers)', 'Web Scraping & Parsing', 'Regular Expressions', 'Common Web Vulnerabilities (XSS, SQLi)', 'Session Management (Cookies)'],
+                libs: ['requests', 'BeautifulSoup4', 're'],
+                skills: { Web: 65, Programming: 25, Security: 10 },
+                phases: [
+                    { title: 'Phase 1: HTTP Request/Response Handler', content: 'Use the `requests` library to send GET and POST requests. Learn to handle response codes, text content, headers, and cookies. Implement session management to maintain state.' },
+                    { title: 'Phase 2: Basic XSS Scanner', content: 'Identify input points in a web app (like URL parameters). Craft simple XSS payloads and inject them into requests. Check if the payload is reflected in the HTML response without proper encoding.' },
+                    { title: 'Phase 3: Basic SQL Injection Scanner', content: 'Focus on parameters likely to interact with a database. Craft simple error-based SQLi payloads and inject them. Detect vulnerabilities by searching for common SQL error messages in the response.' },
+                    { title: 'Phase 4: Form Submission & Session Handling', content: 'Implement functionality to log into a target application using a `requests.Session()` object. Optionally, use BeautifulSoup4 to automatically discover and submit forms.' },
+                    { title: 'Phase 5: Reporting', content: 'Create a clear and structured output for found vulnerabilities. Print the vulnerable URL, the payload used, and the type of vulnerability found. Consider saving results to a file.' }
+                ]
+            },
+            project3: {
+                id: 'project3',
+                title: 'Malware Analysis Sandbox',
+                level: 'Advanced',
+                levelValue: 3,
+                icon: '&#128477;',
+                description: 'Build a controlled environment to execute and monitor programs, logging their interactions with the system.',
+                goal: 'To build a simplified, controlled environment (a "sandbox") in Python that can execute a program and monitor its interactions with the file system, processes, and simulated network activity. This project will introduce you to dynamic malware analysis concepts.',
+                concepts: ['Process Management (Spawning, Monitoring)', 'File System Interaction', 'Network Simulation', 'System Calls (Conceptual)', 'Virtual Environments'],
+                libs: ['os', 'subprocess', 'shutil', 'time', 'psutil (optional)'],
+                skills: { Systems: 60, Programming: 35, Security: 5 },
+                phases: [
+                    { title: 'Phase 1: Basic File System Monitor', content: 'Use the `os` module to record the state of a directory before running a program. Use `subprocess` to run the program, then re-scan the directory to report any created, modified, or deleted files.' },
+                    { title: 'Phase 2: Basic Process Monitor', content: 'Use `subprocess.Popen()` to execute and monitor a program. Record its Process ID (PID) and its return code upon completion. Handle timeouts for programs that run too long.' },
+                    { title: 'Phase 3: Network Activity Logger (Simulated)', content: 'Simulate network monitoring by capturing the program\'s standard output and searching for strings like URLs or IP addresses. A true implementation would require more complex proxying.' },
+                    { title: 'Phase 4: Report Generation', content: 'Combine all collected data—file system changes, process information, and network activity—into a single, consolidated analysis report printed to the console or saved to a file.' },
+                    { title: 'Phase 5: Sandbox Environment', content: 'Use the `tempfile` and `shutil` modules to create a temporary, isolated directory for each analysis run. This ensures a clean state for every execution and helps prevent unintended side effects.' }
+                ]
+            }
+        };
+
+        const app = {
+            init() {
+                this.renderDashboard();
+                this.setupEventListeners();
+                this.renderCharts();
+            },
+
+            renderDashboard() {
+                const dashboardView = document.getElementById('view-dashboard');
+                const cardContainer = dashboardView.querySelector('.grid');
+                cardContainer.innerHTML = Object.values(projectData).map(p => this.createProjectCard(p)).join('');
+            },
+
+            renderProjectDetail(projectId) {
+                const project = projectData[projectId];
+                if (!project) return;
+                
+                const detailContainer = document.getElementById(`view-${projectId}`);
+                detailContainer.innerHTML = `
+                    <section class="max-w-4xl mx-auto">
+                         <div class="text-center mb-12">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-2">${project.level}</span>
+                            <h2 class="text-4xl font-bold text-slate-900">${project.title}</h2>
+                            <p class="text-lg text-slate-600 mt-2">${project.goal}</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-12">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="font-semibold text-xl mb-4 text-slate-800">Key Concepts to Master</h3>
+                                <ul class="space-y-2">
+                                    ${project.concepts.map(c => `<li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">&#10003;</span><span class="text-slate-600">${c}</span></li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="font-semibold text-xl mb-4 text-slate-800">Recommended Libraries</h3>
+                                <ul class="space-y-2">
+                                    ${project.libs.map(l => `<li class="flex items-start"><span class="text-indigo-500 font-mono text-sm bg-indigo-50 px-2 py-1 rounded mr-3 mt-0.5">${l}</span><span class="text-slate-600"></span></li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl font-bold text-slate-900 mb-6 text-center">Detailed Steps</h3>
+                            <div class="space-y-4" style="counter-reset: step-counter;">
+                                ${project.phases.map(phase => this.createPhaseAccordion(phase)).join('')}
+                            </div>
+                        </div>
+                    </section>
+                `;
+            },
+            
+            createPhaseAccordion(phase) {
+                return `
+                    <details class="group bg-white rounded-lg shadow-sm overflow-hidden">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer list-none">
+                            <h4 class="font-semibold text-slate-800 text-lg">${phase.title}</h4>
+                            <span class="details-arrow text-slate-500 group-hover:text-slate-800 transition-transform duration-300">&#10148;</span>
+                        </summary>
+                        <div class="p-5 pt-0">
+                           <p class="text-slate-600 leading-relaxed phase-step">${phase.content}</p>
+                        </div>
+                    </details>
+                `;
+            },
+
+            createProjectCard(project) {
+                return `
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer" onclick="app.switchView('${project.id}')">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-5xl">${project.icon}</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">${project.level}</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-2">${project.title}</h3>
+                            <p class="text-slate-600">${project.description}</p>
+                        </div>
+                        <button class="text-blue-600 font-semibold mt-6 text-left">View Project &rarr;</button>
+                    </div>
+                `;
+            },
+
+            renderCharts() {
+                const complexityCtx = document.getElementById('complexityChart').getContext('2d');
+                new Chart(complexityCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.values(projectData).map(p => p.title),
+                        datasets: [{
+                            label: 'Complexity',
+                            data: Object.values(projectData).map(p => p.levelValue),
+                            backgroundColor: ['#93c5fd', '#60a5fa', '#3b82f6'],
+                            borderColor: ['#60a5fa', '#3b82f6', '#2563eb'],
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value) {
+                                        if (value === 1) return 'Beginner';
+                                        if (value === 2) return 'Advanced';
+                                        if (value === 3) return 'Advanced+';
+                                        return '';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+                new Chart(skillsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Networking', 'Web Tech', 'System Internals', 'Core Programming', 'CLI/Tooling', 'Security Concepts'],
+                        datasets: [{
+                            label: 'Project 1',
+                            data: [projectData.project1.skills.Networking || 0, 0, 0, projectData.project1.skills.Programming || 0, projectData.project1.skills.CLI || 0, 0],
+                        }, {
+                            label: 'Project 2',
+                            data: [0, projectData.project2.skills.Web || 0, 0, projectData.project2.skills.Programming || 0, 0, projectData.project2.skills.Security || 0],
+                        }, {
+                            label: 'Project 3',
+                            data: [0, 0, projectData.project3.skills.Systems || 0, projectData.project3.skills.Programming || 0, 0, projectData.project3.skills.Security || 0],
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed + '% ' + context.label;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+
+            setupEventListeners() {
+                document.getElementById('main-nav').addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        const viewId = e.target.dataset.view;
+                        this.switchView(viewId);
+                    }
+                });
+            },
+
+            switchView(viewId) {
+                document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+                const targetViewId = viewId.startsWith('project') ? `view-${viewId}` : `view-${viewId}`;
+                const targetView = document.getElementById(targetViewId);
+                
+                if (targetView) {
+                    if (viewId.startsWith('project') && targetView.innerHTML === '') {
+                        this.renderProjectDetail(viewId);
+                    }
+                    targetView.classList.remove('hidden');
+                }
+                
+                document.querySelectorAll('#main-nav .nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if(link.dataset.view === viewId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
